@@ -15,7 +15,7 @@ Prerequisites
 Before you start, ensure that you have the following installed:
 
 Python 3.12 (or higher)
-Required Python packages listed in the requirements.txt file (e.g., streamlit, matplotlib, flask, pandas, scipy, astral)
+Required Python packages listed in the requirements.txt file (e.g., streamlit, matplotlib, fastapi, pandas, scipy, shap)
 
 Navigate to the project directory on your local machine:
 
@@ -212,7 +212,7 @@ Windows:
     
     Mac/Linux:
 ```bash
-        SET file_search_path = '/path/to/your/files/';
+        set file_search_path = '/path/to/your/files/';
         CREATE TABLE EmployeeAttritionData AS SELECT * FROM 'EmployeeAttritionData.parquet';
         SELECT * FROM 'EmployeeAttritionData.parquet' LIMIT 10;
 ```
