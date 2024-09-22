@@ -1,5 +1,5 @@
 # 📊 Employee Attrition 
-This project aims to model the probability of employee attrition and provide actionable insights by identifying the key variables that contribute to attrition. The solution involves building an exploratory data analysis (EDA) and running a Machine Learning (ML) model to predict attrition. The final deliverable will offer insights into which variables need immediate attention and provide a roadmap for future ML pipeline implementation.
+This project models the likelihood of employee attrition by utilizing Exploratory Data Analysis (EDA) and Machine Learning (ML) techniques. It provides actionable insights into the key factors contributing to employee turnover. The project also offers interactive simulation tools to predict employee attrition using a custom-built ML pipeline.
 
 # 📖 Overview
 The goal of this project is to model and understand employee attrition using a dataset provided, focusing on the following key points:
