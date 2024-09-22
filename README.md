@@ -144,7 +144,7 @@ Example Response:
     "prediction": "Stay",
     "probability": 64.0
     }
-    ```
+```
 
 ## 🔄 ML Pipeline Proposal
 If the PoC is successful, the next step is to build a production-ready Machine Learning pipeline:
@@ -197,7 +197,7 @@ Using a Python library like pyodbc, you can establish a connection to the SQL Se
         # Query employee data
         query = "SELECT * FROM EmployeeAttritionData"
         df = pd.read_sql(query, connection)
-    ```
+```
 
 # 💾 SQL Server Setup and Querying
 
@@ -208,14 +208,14 @@ Windows:
         SET file_search_path = 'C:\path\to\your\files\';
         CREATE TABLE EmployeeAttritionData AS SELECT * FROM 'EmployeeAttritionData.parquet';
         SELECT * FROM 'EmployeeAttritionData.parquet' LIMIT 10;
-    ```
+```
     
     Mac/Linux:
 ```bash
         SET file_search_path = '/path/to/your/files/';
         CREATE TABLE EmployeeAttritionData AS SELECT * FROM 'EmployeeAttritionData.parquet';
         SELECT * FROM 'EmployeeAttritionData.parquet' LIMIT 10;
-    ```
+```
 This allows you to quickly load data into memory and begin exploring it in the SQL editor.
 ## 📊 Insights & Recommendations
 Once the model is trained and tested, the insights can be translated into actionable recommendations:
