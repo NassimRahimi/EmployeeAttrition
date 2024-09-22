@@ -48,7 +48,7 @@ virtualenv, then install requirements
 ```
 ## 🐳 Method 2: Using Docker
 
-To simplify deployment and ensure consistency across different environments, the application can be run using Docker. This section outlines how to build and run the Docker container for both the Streamlit app and the FastAPI API.
+To simplify deployment and ensure consistency across environments, this section outlines how to build and run Docker containers for both the Streamlit app and the FastAPI API."
 
 1. Ensure the Dockerfile is located in the project’s root directory.
 
