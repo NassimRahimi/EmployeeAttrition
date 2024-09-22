@@ -48,6 +48,7 @@ To simplify deployment and ensure consistency across different environments, the
 
 1. Dockerfile
 Ensure the Dockerfile is located in the project’s root directory.
+
 2. Build the Docker Image
 In your terminal, navigate to the project directory and run the following command to build the Docker image:
 
@@ -58,6 +59,7 @@ docker build -t employee-attrition-app .
 This command builds the image using the instructions provided in the Dockerfile and tags it as employee-attrition-app.
 
 3. Run the Docker Container
+
 To run the container for the Streamlit app and FastAPI simultaneously, use the following command:
 ```bash
 docker run -p 8501:8501 -p 8000:8000 employee-attrition-app
@@ -107,9 +109,13 @@ The Streamlit app provides an interactive interface with four key functionalitie
 
 # 🔑 App Structure
 1.	Exploratory Data Analysis (EDA):Department Metrics, Attrition Analysis, Feature Distributions, Correlation Heatmap, Boxplots
+
 2.	Model Pipeline:Visualize the machine learning pipeline architecture, including data preprocessing, feature generation, and model training steps, using a pipeline diagram.
+
 3.	Model Evaluation
-4.	Attrition Prediction Simulation: Simulate attrition by adjusting employee inputs like satisfaction, hours, and salary. Predict the likelihood of an employee staying or leaving.View SHAP explanations to understand key feature impacts.
+
+4.	Attrition Prediction Simulation: Simulate attrition by adjusting employee inputs like satisfaction, hours, and salary. Predict the likelihood of an employee staying or leaving.View SHAP 
+explanations to understand key feature impacts.
 
 Running the Streamlit App
 To run the Streamlit app, execute the following command from the project directory:
@@ -206,10 +212,15 @@ Example Response:
 
 ## 🔄 ML Pipeline Proposal
 If the PoC is successful, the next step is to build a production-ready Machine Learning pipeline:
+
     1.	Data Ingestion: Extract data from an SQL server using SQLAlchemy or Pandas.
+
     2.	Data Preprocessing: Clean, encode categorical features, and scale numerical data through an automated pipeline.
+
     3.	Feature Engineering: Create new features from existing data to enhance model performance and capture underlying patterns.
+
     4.	Model Training & Deployment: Train models using Scikit-learn or TensorFlow, and manage deployment with MLflow or Kubeflow.
+
     5.	Monitoring & Retraining: Continuously monitor model performance and retrain with updated data to ensure accuracy.
 
 # 💾 Data Storage and Retrieval
@@ -277,12 +288,16 @@ Windows:
 This allows you to quickly load data into memory and begin exploring it in the SQL editor.
 ## 📊 Insights & Recommendations
 Once the model is trained and tested, the insights can be translated into actionable recommendations:
+
 •	High Attrition Risk Departments: Departments with high attrition risk, as identified by the model, should be investigated for root causes.
+
 •	Impactful Features: Features such as low satisfaction levels, high working hours, or lack of promotions should be addressed as they contribute significantly to attrition.
+
 •	Predictive Monitoring: Set up an automated system to flag employees at high risk of leaving, allowing HR to intervene proactively.
 
 ## 📋 Notes
 •	The dataset used in this project is cleaned_df.xlsx.
+
 •	Streamlit app provides interactive features for easy data exploration and visualization.
 
 ## 🧪 Testing
@@ -295,9 +310,13 @@ Ensure all tests pass before deploying or committing significant changes.
 
 ## 🧹 Linting
 Use Ruff and Black to lint and format the code:
+
 •	Black: Automatically formats Python code to comply with PEP 8.
+
 •	Ruff: A linter to identify any issues with your code.
+
 Run Black to format your code:
+
 ```bash
 
 black .
@@ -310,6 +329,8 @@ ruff .
 
 ## ❓ Troubleshooting
 If you encounter any issues:
+
 •	Missing dependencies: Ensure that all required dependencies are installed by running pip install -r requirements.txt.
+
 •	Virtual environment issues: Make sure your virtual environment is activated before running the app.
 
