@@ -48,10 +48,10 @@ source venv/bin/activate
 The Streamlit app provides an interactive interface with four key functionalities:
 
 # 🔑 App Structure
-    1.	Exploratory Data Analysis (EDA):Department Metrics, Attrition Analysis, Feature Distributions, Correlation Heatmap, Boxplots
-    2.	Model Pipeline:Visualize the machine learning pipeline architecture, including data preprocessing, feature generation, and model training steps, using a pipeline diagram.
-    3.	Model Evaluation
-    4.	Attrition Prediction Simulation: Simulate attrition by adjusting employee inputs like satisfaction, hours, and salary. Predict the likelihood of an employee staying or leaving.View SHAP explanations to understand key feature impacts.
+1.	Exploratory Data Analysis (EDA):Department Metrics, Attrition Analysis, Feature Distributions, Correlation Heatmap, Boxplots
+2.	Model Pipeline:Visualize the machine learning pipeline architecture, including data preprocessing, feature generation, and model training steps, using a pipeline diagram.
+3.	Model Evaluation
+4.	Attrition Prediction Simulation: Simulate attrition by adjusting employee inputs like satisfaction, hours, and salary. Predict the likelihood of an employee staying or leaving.View SHAP explanations to understand key feature impacts.
 
 Running the Streamlit App
 To run the Streamlit app, execute the following command from the project directory:
@@ -170,7 +170,7 @@ Create a .env file in the project's root directory and fill it with the followin
         SQL_DATABASE=your-database-name
         SQL_USERNAME=your-username
         SQL_PASSWORD=your-password
-    ```
+```
 # Establish SQL Server Connection
 Using a Python library like pyodbc, you can establish a connection to the SQL Server to fetch data directly into the ML pipeline:
 ```bash 
