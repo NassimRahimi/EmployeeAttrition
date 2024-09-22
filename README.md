@@ -56,6 +56,7 @@ docker build -t employee-attrition-app .
 ```
 
 This command builds the image using the instructions provided in the Dockerfile and tags it as employee-attrition-app.
+
 3. Run the Docker Container
 To run the container for the Streamlit app and FastAPI simultaneously, use the following command:
 ```bash
@@ -69,7 +70,7 @@ docker run -p 8501:8501 -p 8000:8000 employee-attrition-app
 To test the FastAPI endpoints, you can navigate to http://localhost:8000/docs to interact with the API via the automatically generated Swagger UI.
 
 
-🚀 Testing the Prediction Endpoint
+### 🚀 Testing the Prediction Endpoint
 You can test the FastAPI /predict endpoint using either curl in your terminal or Postman. Below are the instructions for both methods.
 Using curl
 Run this command in your terminal to send a POST request to the /predict endpoint with sample employee data:
