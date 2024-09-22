@@ -160,8 +160,8 @@ In a production environment, employee data could be stored in a SQL Server datab
 # Install SQL Server ODBC Driver
 Before querying the database, install the appropriate driver:
     
-    - [Windows Download](https://learn.microsoft.com/en-us/sql/connect/odbc/microsoft-odbc-driver-for-sql-server?view=sql-server-ver16)
-    - [Linux and Mac Download](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=alpine18-install%2Calpine17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline)
+[Windows Download](https://learn.microsoft.com/en-us/sql/connect/odbc/microsoft-odbc-driver-for-sql-server?view=sql-server-ver16).
+[Linux and Mac Download](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=alpine18-install%2Calpine17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline).
 
 # Set Up Environment Variables
 Create a .env file in the project's root directory and fill it with the following details:
