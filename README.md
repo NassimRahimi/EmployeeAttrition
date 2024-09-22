@@ -289,19 +289,6 @@ Windows:
         SELECT * FROM 'EmployeeAttritionData.parquet' LIMIT 10;
 ```
 This allows you to quickly load data into memory and begin exploring it in the SQL editor.
-## 📊 Insights & Recommendations
-Once the model is trained and tested, the insights can be translated into actionable recommendations:
-
-•	High Attrition Risk Departments: Departments with high attrition risk, as identified by the model, should be investigated for root causes.
-
-•	Impactful Features: Features such as low satisfaction levels, high working hours, or lack of promotions should be addressed as they contribute significantly to attrition.
-
-•	Predictive Monitoring: Set up an automated system to flag employees at high risk of leaving, allowing HR to intervene proactively.
-
-## 📋 Notes
-•	The dataset used in this project is cleaned_df.xlsx.
-
-•	Streamlit app provides interactive features for easy data exploration and visualization.
 
 ## 🧪 Testing
 Run the following command to execute automated tests:
@@ -337,3 +324,31 @@ If you encounter any issues:
 
 •	Virtual environment issues: Make sure your virtual environment is activated before running the app.
 
+## ❓ Troubleshooting: Port 8501 Already in Use
+If you encounter an error like Bind for 0.0.0.0:8501 failed: port is already allocated, another process (likely Docker) is using the port.
+Steps to Free Port 8501:
+    1. Check Running Containers:
+```bash
+        docker ps
+ ```
+    Look for the container using port 8501.
+    2. Stop the Container:
+```bash
+        docker stop <container_id>
+```
+    Replace <container_id> with the container ID from docker ps.
+    3. Run Your Container Again:
+```bash
+        docker run -p 8501:8501 -p 8000:8000 employee-attrition-app
+```
+    Alternatively: Kill the Process
+
+    1. Find the Process:
+```bash
+        lsof -i :8501
+```
+    2. Kill the Process:
+```bash
+        kill -9 <PID>
+```
+Then, re-run your container.
