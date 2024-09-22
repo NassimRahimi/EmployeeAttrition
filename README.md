@@ -137,7 +137,7 @@ To make a request to the /predict endpoint using curl, use the following command
     "work_accident": 0,
     "promotion_last_5years": 1
     }'
-    ```
+```
 Example Response:
 ```bash
     {

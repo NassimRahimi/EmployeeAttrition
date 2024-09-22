@@ -1,0 +1,25 @@
+{
+    "_comment_1": "Configuration settings for the Novomnordisk employee turnover",
+    "_comment_2": "",
+    
+    "logging": {
+        "level": "INFO",
+        "format": "%(asctime)s - %(levelname)s - %(message)s"
+    },
+    "data_paths": {
+        "df_csv": "data/Worksheet_in_Case_Study.xlsx"
+        
+    },
+    "z_score_threshold": 4.8,
+
+    "corr_threshold": 0.95,
+    "pca_variance":0.95,
+    "lasso_cv": 10,
+  
+    "_comment_4": "This is a comment about Define custom threshold for classification.",
+    "custom_threshold": 0.5,
+
+    "_comment_3": "Select modelling estimator: xgboost calssifier or Randomforest classifier",
+
+    "model": "rf"
+}
