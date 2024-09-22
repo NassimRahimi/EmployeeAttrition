@@ -14,7 +14,7 @@ The goal of this project is to model and understand employee attrition using a d
 Prerequisites
 Before you start, ensure that you have the following installed:
 
-Python 3.11 (or higher)
+Python 3.12 (or higher)
 Required Python packages listed in the requirements.txt file (e.g., streamlit, matplotlib, flask, pandas, scipy, astral)
 
 Navigate to the project directory on your local machine:
