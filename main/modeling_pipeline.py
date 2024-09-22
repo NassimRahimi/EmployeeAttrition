@@ -11,7 +11,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score
 from sklearn.exceptions import NotFittedError
-from main.customtransformer import OutlierRemover, CorrelationFilter, ThresholdClassifier
+from main.customtransformer import (
+    OutlierRemover,
+    CorrelationFilter,
+    ThresholdClassifier,
+)
 from sklearn.decomposition import PCA
 from data_preprocessing import preprocess_employee_data
 from sklearn.preprocessing import OneHotEncoder
@@ -21,14 +25,19 @@ import numpy as np
 
 
 import logging
+
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 
 # Load the configuration from a JSON file
 def load_config(config_file_path):
     with open(config_file_path, "r") as config_file:
         config = json.load(config_file)
     return config
+
 
 # Load the config at the start of your application
 config = load_config("config/config.json")
@@ -38,15 +47,16 @@ lasso_cv = config.get("lasso_cv", 5)
 z_score_threshold = config.get("z_score_threshold", 4.8)
 pca_variance = config.get("pca_variance", 0.95)
 
+
 # Function to preprocess data and train the model
 def preprocess_and_train_model(df, custom_threshold=0.5):
     """
     Preprocess the data and train a model using RandomForest and XGBoost with a custom threshold.
-    
+
     Parameters:
         df (pd.DataFrame): The input DataFrame.
         custom_threshold (float): The threshold for classification (default=0.14).
-    
+
     Returns:
         Tuple: training/test datasets, predictions, and trained pipeline.
     """
@@ -59,33 +69,46 @@ def preprocess_and_train_model(df, custom_threshold=0.5):
     assert "left" not in X.columns, "left should have been removed!"
 
     # Define the numerical columns to pass into OutlierRemover
-    numerical_columns = ['satisfaction_level', 'last_evaluation', 'number_project', 'average_monthly_hours', 
-                         'time_spend_company', 'work_accident', 'promotion_last_5years']
+    numerical_columns = [
+        "satisfaction_level",
+        "last_evaluation",
+        "number_project",
+        "average_monthly_hours",
+        "time_spend_company",
+        "work_accident",
+        "promotion_last_5years",
+    ]
 
     # Train-test split
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
 
     # Apply outlier removal on X_train and synchronize y_train
-    outlier_remover = OutlierRemover(z_score_threshold=z_score_threshold, numerical_columns=numerical_columns)
+    outlier_remover = OutlierRemover(
+        z_score_threshold=z_score_threshold, numerical_columns=numerical_columns
+    )
     X_train_cleaned = outlier_remover.fit_transform(X_train)
-    
+
     # Align y_train by removing rows corresponding to removed outliers
     y_train_cleaned = y_train.loc[X_train_cleaned.index]
 
     # Separate numerical and categorical features
-    numeric_features = X.select_dtypes(include=['float64', 'int64']).columns
-    categorical_features = X.select_dtypes(include=['object', 'category']).columns
+    numeric_features = X.select_dtypes(include=["float64", "int64"]).columns
+    categorical_features = X.select_dtypes(include=["object", "category"]).columns
 
     # Define preprocessing steps for numerical and categorical features
-    numeric_pipeline = Pipeline([
-        ("scale", StandardScaler())  # Scale numeric features
-    ])
+    numeric_pipeline = Pipeline([("scale", StandardScaler())])  # Scale numeric features
 
     # Categorical pipeline using pd.get_dummies wrapped with FunctionTransformer
-    categorical_pipeline = Pipeline([
-    ("one_hot", OneHotEncoder(drop="first", sparse_output=False))  # Use OneHotEncoder instead of FunctionTransformer
-    ])
-   
+    categorical_pipeline = Pipeline(
+        [
+            (
+                "one_hot",
+                OneHotEncoder(drop="first", sparse_output=False),
+            )  # Use OneHotEncoder instead of FunctionTransformer
+        ]
+    )
 
     # ColumnTransformer to apply preprocessing to the correct columns
     preprocessor = ColumnTransformer(
@@ -93,35 +116,42 @@ def preprocess_and_train_model(df, custom_threshold=0.5):
             ("numeric", numeric_pipeline, numeric_features),
             ("categorical", categorical_pipeline, categorical_features),
         ],
-    remainder='drop'  # Drop any untransformed features
-)
+        remainder="drop",  # Drop any untransformed features
+    )
     # Feature selection using LassoCV
     SelectLassoCV = SelectFromModel(
-        estimator=LassoCV(cv=lasso_cv, random_state=42),
-        threshold=None
+        estimator=LassoCV(cv=lasso_cv, random_state=42), threshold=None
     )
 
     # Apply Correlation Filter before the feature selection (Lasso)
     correlation_filter = CorrelationFilter(threshold=corr_threshold)
     # PCA (Principal Component Analysis)
     pca = PCA(n_components=pca_variance)  # Retain 95% variance
-    
 
     # Models with class weight balancing
     rf_model = RandomForestClassifier(class_weight="balanced")
-    xgb_model = xgb.XGBClassifier(scale_pos_weight=(y_train_cleaned == 0).sum() / (y_train_cleaned == 1).sum())
+    xgb_model = xgb.XGBClassifier(
+        scale_pos_weight=(y_train_cleaned == 0).sum() / (y_train_cleaned == 1).sum()
+    )
 
     # Wrap XGBoost model in a threshold classifier
-    threshold_adjusted_xgb_model = ThresholdClassifier(base_estimator=xgb_model, threshold=custom_threshold)
+    threshold_adjusted_xgb_model = ThresholdClassifier(
+        base_estimator=xgb_model, threshold=custom_threshold
+    )
 
     # Final pipeline
-    ModellingPipeline = Pipeline([
-        ("preprocessor", preprocessor),  # Preprocessing numeric/categorical
-        ("correlation_filter", correlation_filter),  # Correlation filter to remove highly correlated features
-        ("pca", pca),
-        ("lasso", SelectLassoCV),  # Lasso-based feature selection
-        ("estimator", threshold_adjusted_xgb_model)  # Final estimator
-    ])
+    ModellingPipeline = Pipeline(
+        [
+            ("preprocessor", preprocessor),  # Preprocessing numeric/categorical
+            (
+                "correlation_filter",
+                correlation_filter,
+            ),  # Correlation filter to remove highly correlated features
+            ("pca", pca),
+            ("lasso", SelectLassoCV),  # Lasso-based feature selection
+            ("estimator", threshold_adjusted_xgb_model),  # Final estimator
+        ]
+    )
 
     # Fit the pipeline
     logging.info("Fitting the ModellingPipeline!")
@@ -143,7 +173,7 @@ def preprocess_and_train_model(df, custom_threshold=0.5):
         "y_test_hat": y_test_hat,
         "y_train_pred": y_train_pred,
         "y_test_pred": y_test_pred,
-        "trained_pipeline": trained_pipeline
+        "trained_pipeline": trained_pipeline,
     }
 
 
@@ -169,37 +199,52 @@ if __name__ == "__main__":
     logging.info("Model training and prediction complete!")
 
     # Ensure numeric and categorical features are defined based on X_train
-    numeric_features = X_train.select_dtypes(include=['float64', 'int64']).columns.tolist()
-    categorical_features = X_train.select_dtypes(include=['object', 'category']).columns.tolist()
+    numeric_features = X_train.select_dtypes(
+        include=["float64", "int64"]
+    ).columns.tolist()
+    categorical_features = X_train.select_dtypes(
+        include=["object", "category"]
+    ).columns.tolist()
 
     # Extract feature names from the preprocessor (ColumnTransformer)
-    preprocessor = trained_pipeline.named_steps['preprocessor']
+    preprocessor = trained_pipeline.named_steps["preprocessor"]
 
     # Extract numeric and one-hot encoded feature names
-    ohe_feature_names = preprocessor.transformers_[1][1].get_feature_names_out(categorical_features)
+    ohe_feature_names = preprocessor.transformers_[1][1].get_feature_names_out(
+        categorical_features
+    )
 
     # Combine numeric and one-hot encoded feature names
     feature_names = np.hstack([numeric_features, ohe_feature_names])
 
     # Extract feature importances from the trained model
-    feature_importances = trained_pipeline.named_steps['estimator'].base_estimator.feature_importances_
+    feature_importances = trained_pipeline.named_steps[
+        "estimator"
+    ].base_estimator.feature_importances_
 
     # Match the selected feature names with the model's selected features
-    feature_names_after_pca = feature_names[:len(feature_importances)]  # Adjust for PCA or Lasso
+    feature_names_after_pca = feature_names[
+        : len(feature_importances)
+    ]  # Adjust for PCA or Lasso
 
     # Create a DataFrame for feature importance and feature names
-    feature_importance_df = pd.DataFrame({
-        'Feature': feature_names_after_pca,
-        'Importance': feature_importances
-    })
+    feature_importance_df = pd.DataFrame(
+        {"Feature": feature_names_after_pca, "Importance": feature_importances}
+    )
 
     # Sort the feature importances in descending order
-    feature_importance_df = feature_importance_df.sort_values(by='Importance', ascending=False)
+    feature_importance_df = feature_importance_df.sort_values(
+        by="Importance", ascending=False
+    )
 
     # Plot the top features
     plt.figure(figsize=(10, 8))
-    plt.barh(feature_importance_df['Feature'][:10], feature_importance_df['Importance'][:10], color='magenta')
-    plt.xlabel('Feature Importance')
-    plt.title('Top 10 Features by Importance')
+    plt.barh(
+        feature_importance_df["Feature"][:10],
+        feature_importance_df["Importance"][:10],
+        color="magenta",
+    )
+    plt.xlabel("Feature Importance")
+    plt.title("Top 10 Features by Importance")
     plt.gca().invert_yaxis()  # To display the highest importance at the top
     plt.show()

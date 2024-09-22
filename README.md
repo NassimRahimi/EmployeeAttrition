@@ -305,7 +305,7 @@ black .
 Run Ruff to lint your code:
 ```bash
 
-sruff .
+ruff .
 ```
 
 ## ❓ Troubleshooting

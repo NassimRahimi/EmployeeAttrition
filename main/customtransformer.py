@@ -2,20 +2,30 @@ import numpy as np
 import pandas as pd
 import logging
 from sklearn.feature_selection._base import SelectorMixin
-from sklearn.base import TransformerMixin, BaseEstimator, ClassifierMixin, MetaEstimatorMixin
+from sklearn.base import (
+    TransformerMixin,
+    BaseEstimator,
+    ClassifierMixin,
+    MetaEstimatorMixin,
+)
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'main')))
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "main")))
 from main.data_preprocessing import remove_outliers, preprocess_employee_data
 
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 
 class OutlierRemover(TransformerMixin, BaseEstimator):
     """
     Custom Transformer to remove outliers based on Z-score.
     """
+
     def __init__(self, z_score_threshold=3, numerical_columns=None):
         self.z_score_threshold = z_score_threshold
         self.numerical_columns = numerical_columns
@@ -29,7 +39,11 @@ class OutlierRemover(TransformerMixin, BaseEstimator):
             X = pd.DataFrame(X)
 
         # Call the remove_outliers function and return the cleaned DataFrame
-        return remove_outliers(X, z_score_threshold=self.z_score_threshold, numerical_columns=self.numerical_columns)
+        return remove_outliers(
+            X,
+            z_score_threshold=self.z_score_threshold,
+            numerical_columns=self.numerical_columns,
+        )
 
 
 class CorrelationFilter(BaseEstimator, SelectorMixin, MetaEstimatorMixin):
@@ -72,7 +86,9 @@ class CorrelationFilter(BaseEstimator, SelectorMixin, MetaEstimatorMixin):
         self.kept_features = [
             ind for ind in range(X.shape[1]) if ind not in self.correlated_features
         ]
-        logging.info(f"CorrelationFilter selected {len(self.kept_features)} features out of {X.shape[1]}.")
+        logging.info(
+            f"CorrelationFilter selected {len(self.kept_features)} features out of {X.shape[1]}."
+        )
 
         return self
 
