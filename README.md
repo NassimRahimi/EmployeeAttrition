@@ -327,27 +327,27 @@ If you encounter any issues:
 ## ❓ Troubleshooting: Port 8501 Already in Use
 If you encounter an error like Bind for 0.0.0.0:8501 failed: port is already allocated, another process (likely Docker) is using the port.
 Steps to Free Port 8501:
-    1. Check Running Containers:
+1. Check Running Containers:
 ```bash
         docker ps
  ```
-    Look for the container using port 8501.
-    2. Stop the Container:
+Look for the container using port 8501.
+2. Stop the Container:
 ```bash
         docker stop <container_id>
 ```
-    Replace <container_id> with the container ID from docker ps.
-    3. Run Your Container Again:
+Replace <container_id> with the container ID from docker ps.
+3. Run Your Container Again:
 ```bash
         docker run -p 8501:8501 -p 8000:8000 employee-attrition-app
 ```
-    Alternatively: Kill the Process
+Alternatively: Kill the Process
 
-    1. Find the Process:
+1. Find the Process:
 ```bash
         lsof -i :8501
 ```
-    2. Kill the Process:
+2. Kill the Process:
 ```bash
         kill -9 <PID>
 ```
