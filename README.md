@@ -11,15 +11,17 @@ The goal of this project is to model and understand employee attrition using a d
 
 # 🚀 Getting Started
 
-Prerequisites
-Before you start, ensure that you have the following installed:
-
-Python 3.12 (or higher)
-Required Python packages listed in the requirements.txt file (e.g., streamlit, matplotlib, fastapi, pandas, scipy, shap)
-
+You can get started with this project using one of two methods:
+1.	Using a Virtual Environment (Recommended for local development).
+2.	Using Docker (For containerized deployment, ensuring consistency across environments).
+Please choose one of the methods below based on your preference.
+## 🛠️ Method 1: Using a Virtual Environment (venv)
+Prerequisites:
+•	Python 3.12 (or higher)
+•	Required Python packages listed in the requirements.txt file
 Navigate to the project directory on your local machine:
 
-## 📦 Installation
+### 📦 Installation
 
 Clone the repository and navigate to the project directory:
 
@@ -30,24 +32,25 @@ cd EmployeeAttrition
 
 To install the Python package for local development, first create a
 virtualenv, then install requirements
-
+### macOS/Linux
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -U pip wheel
-pip install -r requirements.txt
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -U pip wheel
+    pip install -r requirements.txt
 ```
-
-To activate the environment whenever you open a new terminal, type:
-
+### Windows
 ```bash
-source venv/bin/activate
+    python -m venv venv
+    venv\Scripts\activate
+    pip install -U pip wheel
+    pip install -r requirements.txt
 ```
-## 🐳 Running with Docker
+## 🐳 Method 2: Using Docker
+
 To simplify deployment and ensure consistency across different environments, the application can be run using Docker. This section outlines how to build and run the Docker container for both the Streamlit app and the FastAPI API.
 
-1. Dockerfile
-Ensure the Dockerfile is located in the project’s root directory.
+1. Ensure the Dockerfile is located in the project’s root directory.
 
 2. Build the Docker Image
 In your terminal, navigate to the project directory and run the following command to build the Docker image:
@@ -77,29 +80,29 @@ You can test the FastAPI /predict endpoint using either curl in your terminal or
 Using curl
 Run this command in your terminal to send a POST request to the /predict endpoint with sample employee data:
 ```bash
-curl -X 'POST' \
-  'http://localhost:8000/predict' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "satisfaction_level": 0.5,
-  "last_evaluation": 0.8,
-  "average_monthly_hours": 200,
-  "time_spend_company": 3,
-  "number_project": 4,
-  "salary": "medium",
-  "department": "sales",
-  "work_accident": 0,
-  "promotion_last_5years": 1
-}'
+    curl -X 'POST' \
+    'http://localhost:8000/predict' \
+    -H 'Content-Type: application/json' \
+    -d '{
+    "satisfaction_level": 0.5,
+    "last_evaluation": 0.8,
+    "average_monthly_hours": 200,
+    "time_spend_company": 3,
+    "number_project": 4,
+    "salary": "medium",
+    "department": "sales",
+    "work_accident": 0,
+    "promotion_last_5years": 1
+    }'
 ```
 
 Example Response:
 
 ```bash
-{
-  "prediction": "Stay",
-  "probability": 64.0
-}
+    {
+    "prediction": "Stay",
+    "probability": 64.0
+    }
 ```
 
 
