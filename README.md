@@ -1,4 +1,4 @@
-# 📊 Employee Attrition Case Study
+# 📊 Employee Attrition 
 This project aims to model the probability of employee attrition and provide actionable insights by identifying the key variables that contribute to attrition. The solution involves building an exploratory data analysis (EDA) and running a Machine Learning (ML) model to predict attrition. The final deliverable will offer insights into which variables need immediate attention and provide a roadmap for future ML pipeline implementation.
 
 # 📖 Overview
