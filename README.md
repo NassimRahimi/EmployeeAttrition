@@ -329,26 +329,26 @@ If you encounter an error like Bind for 0.0.0.0:8501 failed: port is already all
 Steps to Free Port 8501:
 1. Check Running Containers:
 ```bash
-        docker ps
+    docker ps
  ```
 Look for the container using port 8501.
 2. Stop the Container:
 ```bash
-        docker stop <container_id>
+    docker stop <container_id>
 ```
 Replace <container_id> with the container ID from docker ps.
 3. Run Your Container Again:
 ```bash
-        docker run -p 8501:8501 -p 8000:8000 employee-attrition-app
+    docker run -p 8501:8501 -p 8000:8000 employee-attrition-app
 ```
 Alternatively: Kill the Process
 
 1. Find the Process:
 ```bash
-        lsof -i :8501
+    lsof -i :8501
 ```
 2. Kill the Process:
 ```bash
-        kill -9 <PID>
+    kill -9 <PID>
 ```
 Then, re-run your container.
