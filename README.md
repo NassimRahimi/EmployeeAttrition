@@ -43,6 +43,63 @@ To activate the environment whenever you open a new terminal, type:
 ```bash
 source venv/bin/activate
 ```
+## 🐳 Running with Docker
+To simplify deployment and ensure consistency across different environments, the application can be run using Docker. This section outlines how to build and run the Docker container for both the Streamlit app and the FastAPI API.
+
+1. Dockerfile
+Ensure the Dockerfile is located in the project’s root directory.
+2. Build the Docker Image
+In your terminal, navigate to the project directory and run the following command to build the Docker image:
+
+```bash
+docker build -t employee-attrition-app .
+```
+
+This command builds the image using the instructions provided in the Dockerfile and tags it as employee-attrition-app.
+3. Run the Docker Container
+To run the container for the Streamlit app and FastAPI simultaneously, use the following command:
+```bash
+docker run -p 8501:8501 -p 8000:8000 employee-attrition-app
+```
+
+•	Streamlit App will be available at http://localhost:8501.
+•	FastAPI will be accessible at http://localhost:8000.
+
+4. Testing the API
+To test the FastAPI endpoints, you can navigate to http://localhost:8000/docs to interact with the API via the automatically generated Swagger UI.
+
+
+🚀 Testing the Prediction Endpoint
+You can test the FastAPI /predict endpoint using either curl in your terminal or Postman. Below are the instructions for both methods.
+Using curl
+Run this command in your terminal to send a POST request to the /predict endpoint with sample employee data:
+```bash
+curl -X 'POST' \
+  'http://localhost:8000/predict' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "satisfaction_level": 0.5,
+  "last_evaluation": 0.8,
+  "average_monthly_hours": 200,
+  "time_spend_company": 3,
+  "number_project": 4,
+  "salary": "medium",
+  "department": "sales",
+  "work_accident": 0,
+  "promotion_last_5years": 1
+}'
+```
+
+Example Response:
+
+```bash
+{
+  "prediction": "Stay",
+  "probability": 64.0
+}
+```
+
+
 ## 🖥️ Streamlit App
 
 The Streamlit app provides an interactive interface with four key functionalities:
