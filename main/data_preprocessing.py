@@ -4,6 +4,7 @@ from scipy.stats import zscore
 import warnings
 import json
 import logging
+import numpy as np
 
 warnings.filterwarnings("ignore")
 
