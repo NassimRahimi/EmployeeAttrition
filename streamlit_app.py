@@ -41,17 +41,17 @@ st.markdown(
     """
     <style>
     .title {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         text-align: center;
     }
     .small-header {
-        font-size: 15px;
+        font-size: 13px;
         font-weight: bold;
         margin-top: 15px;
     }
     .explanation {
-        font-size: 12px;
+        font-size: 10px;
         font-weight: normal;
         margin-top: 10px;
     }
@@ -59,7 +59,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 
 # Load images using Streamlit caching
 @st.cache_resource
@@ -139,12 +138,12 @@ st.markdown(
     """
     <style>
     .title {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         text-align: center;
     }
     .small-header {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: bold;
         margin-top: 15px;
     }
@@ -158,10 +157,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-
 # Sidebar Title Above the Logo
-st.sidebar.markdown("<h1 style='text-align: center; font-size: 12px;'>Employee Attrition Dashboard</h1>", unsafe_allow_html=True)
+st.sidebar.markdown("<h1 style='text-align: center; font-size: 10px;'>Employee Attrition Dashboard</h1>", unsafe_allow_html=True)
 
 # Display the logo in the sidebar
 col1, col2, col3 = st.sidebar.columns([1, 5, 1])
@@ -210,6 +207,16 @@ if page == "Exploratory Data Analysis":
     )
     department_metrics_img = load_image("data/Department_Metrics.png")
     st.image(department_metrics_img, caption="Department Metrics")
+    st.markdown(
+    """
+    <ul>
+        <li style="font-size: 11px;">Management, product management, and support departments show the highest average **satisfaction levels** among employees, while HR and accounting show the lowest.</li>
+        <li style="font-size: 11px;">Technical and management departments have the highest **average monthly hours**, suggesting that these departments might experience higher workloads.</li>
+        <li style="font-size: 11px;">Employees in management and technical departments tend to spend more time in the company, while HR and accounting show shorter average tenures.</li>
+        <li style="font-size: 11px;">The **last evaluation** score remains fairly consistent across all departments, indicating that performance evaluations might not be department-specific.</li>
+    </ul>
+    """, unsafe_allow_html=True
+    )
 
     # Display Attrition Analysis
     st.markdown(
@@ -221,6 +228,17 @@ if page == "Exploratory Data Analysis":
     )
     attrition_analysis_img = load_image("data/Attrition_Analysis.png")
     st.image(attrition_analysis_img, caption="Attrition Analysis")
+    st.markdown(
+    """
+    <ul>
+        <li style="font-size: 11px;">A significant proportion of employees leaving the company have low salaries (over 61%), making salary a key driver of attrition.</li>
+        <li style="font-size: 11px;">The sales and support departments contribute the most to overall attrition, with 31.9% and 17.5% respectively.</li>
+        <li style="font-size: 11px;">The technical department follows closely with 22% attrition, indicating this group also faces high turnover.</li>
+        <li style="font-size: 11px;">Addressing salary-related concerns may help reduce attrition rates, particularly in the sales, support, and technical departments.</li>
+    </ul>
+    """, unsafe_allow_html=True
+)
+
 
     # Display Percentage of Employees Left by Salary Category
     st.markdown(
@@ -231,6 +249,17 @@ if page == "Exploratory Data Analysis":
     st.image(
         percentage_employees_left_img,
         caption="Percentage of Employees Left by Salary Category",
+    )
+
+    st.markdown(
+    """
+    <ul>
+        <li style="font-size: 11px;">The HR and accounting departments show the highest attrition rates, with around 29.7% and 27.1% of employees leaving, respectively.</li>
+        <li style="font-size: 11px;">Management has the lowest attrition rate, with only 15.7% of employees leaving.</li>
+        <li style="font-size: 11px;">Employees with low salaries have the highest attrition rate (30.8%), while those with high salaries have the lowest attrition rate (7.2%).</li>
+        <li style="font-size: 11px;">Sales and support departments also show significant attrition, suggesting these areas may need more focus for retention strategies.</li>
+    </ul>
+    """, unsafe_allow_html=True
     )
 
     # Display Distribution of Features
@@ -244,6 +273,17 @@ if page == "Exploratory Data Analysis":
     )
     distribution_features_img = load_image("data/Distribution_of_Features.png")
     st.image(distribution_features_img, caption="Distribution of Features")
+    st.markdown(
+    """
+    <ul>
+        <li style="font-size: 11px;">The **satisfaction level** shows a diverse distribution, with noticeable dips around 0.3 and peaks close to 0.8. Employees with low satisfaction are likely to leave.</li>
+        <li style="font-size: 11px;">The **last evaluation** is fairly evenly distributed across the company, with a slight concentration around 0.5 to 0.8.</li>
+        <li style="font-size: 11px;">**Average monthly hours** are distributed bimodally, with peaks around 150 and 250 hours, suggesting two distinct work-hour groups. Employees in the upper range may experience burnout.</li>
+        <li style="font-size: 11px;">The **time spent in the company** is heavily skewed towards shorter tenures, with most employees staying for 3 years, indicating high turnover early in tenure.</li>
+    </ul>
+    """, unsafe_allow_html=True
+    )
+
 
     # Display Correlation Heatmap
     st.markdown(
@@ -251,16 +291,39 @@ if page == "Exploratory Data Analysis":
     )
     heatmap_img = load_image("data/Heatmap.png")
     st.image(heatmap_img, caption="Correlation Heatmap")
+    st.markdown(
+    """
+    <ul>
+        <li style="font-size: 11px;">**Satisfaction level** has the strongest negative correlation with attrition (left), indicating that employees with lower satisfaction are more likely to leave.</li>
+        <li style="font-size: 11px;">**Work accident** and **salary** show weak correlations with attrition, suggesting these factors may have less influence on employee turnover.</li>
+        <li style="font-size: 11px;">**Average monthly hours** and **last evaluation** are slightly positively correlated, indicating that high-performing employees with long hours might have a higher likelihood of leaving.</li>
+        <li style="font-size: 11px;">**Number of projects** is moderately correlated with time spent at the company, suggesting that employees with longer tenures tend to manage more projects.</li>
+    </ul>
+    """, unsafe_allow_html=True
+    )
 
-    # 6. Correlation with Target (Plotly) - Keep dynamic
+
+    # 6. Correlation with Target
     st.markdown(
         "<h2 class='small-header'>6. Correlation with Target</h2>",
         unsafe_allow_html=True,
     )
     fig_plotly = get_correlation_with_target(df)
     st.plotly_chart(fig_plotly)
+    st.markdown(
+    """
+    <ul>
+        <li style="font-size: 11px;">**Satisfaction level** has the strongest negative correlation with employee attrition, meaning that employees with low satisfaction levels are highly likely to leave.</li>
+        <li style="font-size: 11px;">**Work accident** shows a weaker but still notable negative correlation, suggesting that employees who have experienced a work accident may be less likely to leave.</li>
+        <li style="font-size: 11px;">**Salary** is weakly negatively correlated with attrition, implying that employees with higher salaries are slightly less likely to leave.</li>
+        <li style="font-size: 11px;">Other variables such as **last evaluation**, **department**, and **number of projects** have minimal correlations with attrition, indicating they may not be key factors driving turnover.</li>
+        <li style="font-size: 11px;">**Time spent in the company** has a very small positive correlation, which indicates that longer tenure might slightly increase the likelihood of leaving, but it's not a strong factor.</li>
+    </ul>
+    """, unsafe_allow_html=True
+    )
 
-    # 7. Boxplots vs Left (Keep dynamic)
+
+    # 7. Boxplots vs Left 
     st.markdown(
         "<h2 class='small-header'>7. Boxplots vs Left</h2>", unsafe_allow_html=True
     )
@@ -270,6 +333,22 @@ if page == "Exploratory Data Analysis":
     )
     fig = get_boxplots_vs_left(df)
     st.pyplot(fig)
+    
+    st.markdown(
+    """
+    <ul>
+        <li style="font-size: 11px;">Employees who left (1) have a much lower **satisfaction level** than those who stayed (0), indicating dissatisfaction as a strong predictor of attrition.</li>
+        <li style="font-size: 11px;">The **last evaluation** is similar between employees who stayed and left, suggesting it may not be a significant predictor of attrition.</li>
+        <li style="font-size: 11px;">Employees who left tend to have **more projects** compared to those who stayed, indicating that high workload or project count might contribute to attrition.</li>
+        <li style="font-size: 11px;">There is no significant difference in **average monthly hours** between those who stayed and left, suggesting that this factor may not be a key driver of attrition.</li>
+        <li style="font-size: 11px;">Employees with **longer tenures** (time spent at the company) are more likely to leave, indicating that attrition increases after a few years of service.</li>
+        <li style="font-size: 11px;">The **work accident** feature shows little to no difference between those who left and stayed, suggesting it is not a strong indicator of attrition.</li>
+        <li style="font-size: 11px;">**Salary levels** (encoded) appear to be relatively balanced between employees who left and stayed, indicating salary might not be a strong independent factor but may need to be considered in combination with other variables.</li>
+        <li style="font-size: 11px;">The **promotion in the last 5 years** shows no significant variation between those who stayed and those who left, suggesting it has minimal impact on attrition.</li>
+    </ul>
+    """, unsafe_allow_html=True
+    )
+
 
     # 8. Class Balance of Target Variable (Keep dynamic)
     st.markdown(
@@ -429,7 +508,7 @@ elif page == "Attrition Prediction Simulation":
 
         # Display the prediction on the main page with smaller text
         st.markdown(
-            f"<p style='font-size:14px;'>**Prediction**: The employee is likely to <b>{prediction_label}</b> with a probability of {prediction_proba*100:.2f}%</p>",
+            f"<p style='font-size:12px;'>**Prediction**: The employee is likely to <b>{prediction_label}</b> with a probability of {prediction_proba*100:.2f}%</p>",
             unsafe_allow_html=True,
         )
 
@@ -455,7 +534,7 @@ elif page == "Attrition Prediction Simulation":
         # Use the cleaned feature names in SHAP plot
         if shap_values is not None:
             st.markdown(
-                "<h4 style='font-size:16px;'>SHAP Explanation:</h4>",
+                "<h4 style='font-size:12px;'>SHAP Explanation:</h4>",
                 unsafe_allow_html=True,
             )
             # shap.initjs()
