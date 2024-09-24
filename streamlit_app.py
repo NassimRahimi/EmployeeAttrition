@@ -171,6 +171,7 @@ page = st.sidebar.radio(
         "Exploratory Data Analysis",
         "Model Pipeline",
         "Model Evaluation",
+        "Insights",
         "Attrition Prediction Simulation",
     ],
 )
@@ -242,7 +243,7 @@ if page == "Exploratory Data Analysis":
 
     # Display Percentage of Employees Left by Salary Category
     st.markdown(
-        "<h2 class='small-header'>3. Percentage of Employees Left by Salary Category</h2>",
+        "<h2 class='small-header'>3. Percentage of Employees Left by Department and Salary Category</h2>",
         unsafe_allow_html=True,
     )
     percentage_employees_left_img = load_image("data/Percentage_Employees_Left.png")
@@ -433,6 +434,30 @@ elif page == "Model Evaluation":
         """
         )
 
+
+# Insights Page
+elif page == "Insights":
+    st.markdown(
+        "<h1 class='title'>Insights, Retention Strategies and Roadmap for Implementation</h1>", unsafe_allow_html=True
+    )
+    st.markdown(
+    """
+    <ul>
+        <li style="font-size: 12px;">Satisfaction Level: Both EDA and SHAP analysis highlight that **satisfaction level** is the most significant predictor of attrition.</li>
+        <li style="font-size: 12px;">Compensation: Low salary drives attrition, especially in **sales, support, and technical** departments where many leavers are in lower salary categories.</li>
+        <li style="font-size: 12px;">Workload and Burnout: Higher monthly hours and project loads correlate with higher attrition, indicating burnout and overwork as key issues.</li>
+        <li style="font-size: 12px;">Tenure: Longer tenure increases attrition risk, with employees around the 3-year mark showing higher turnover, likely due to feeling stagnant or undervalued.</li>
+        <li style="font-size: 12px;">Department-Specific Trends: Departments such as sales, support, and technical teams show higher attrition, requiring department-specific interventions.</li>
+        <li style="font-size: 12px;">Performance Evaluation and Promotions: Performance evaluations and promotions show little impact on retention. High evaluation scores slightly increase attrition, indicating high performers may seek opportunities elsewhere.</li>
+    </ul>
+    """, unsafe_allow_html=True
+    )
+    strategy_img = load_image("data/retention_strategies_graph.png")
+    st.image(strategy_img, caption="Retention Strategies")
+    roadmap_img = load_image("data/roadmap_graph.png")
+    st.image(roadmap_img, caption="Roadmap for Implementation") 
+    
+      
     # Simulation Page
 elif page == "Attrition Prediction Simulation":
     st.markdown(
