@@ -174,6 +174,7 @@ page = st.sidebar.radio(
         "Insights, Strategies & Roadmap",
         "PoC ML Pipeline",
         "Attrition Prediction Simulator",
+        "API test"
     ],
 )
 
@@ -453,7 +454,7 @@ elif page == "Insights, Strategies & Roadmap":
     </ul>
     """, unsafe_allow_html=True
     )
-    strategy_img = load_image("data/retention_strategies_updated.png")
+    strategy_img = load_image("data/retention_strategies_updated_v2.png")
     st.image(strategy_img, caption="Retention Strategies")
     roadmap_img = load_image("data/roadmap_graph.png")
     #st.image(roadmap_img, caption="Roadmap for Implementation") 
