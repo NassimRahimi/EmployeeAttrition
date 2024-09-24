@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  streamlit-app:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile  # Ensure the Dockerfile is located in the root of your project
+    image: employee-attrition-app:latest
+    container_name: streamlit_app
+    ports:
+      - "8501:8501"
+    environment:
+      - PYTHONPATH=.
+    command: streamlit run streamlit_app.py --server.port=8501 --server.enableCORS false
+
+  fastapi-app:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile  # Uses the same Dockerfile to build this service
+    image: employee-attrition-fastapi:latest
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=.
+    command: uvicorn fast_api_main:app --host 0.0.0.0 --port 8000
