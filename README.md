@@ -34,14 +34,14 @@ To install the Python package for local development, first create a
 virtualenv, then install requirements
 ### macOS/Linux
 ```bash
-    python3 -m venv venv
+    python3.12 -m venv venv
     source venv/bin/activate
     pip install -U pip wheel
     pip install -r requirements.txt
 ```
 ### Windows
 ```bash
-    python -m venv venv
+    python.12 -m venv venv
     venv\Scripts\activate
     pip install -U pip wheel
     pip install -r requirements.txt
