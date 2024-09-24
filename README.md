@@ -41,7 +41,7 @@ virtualenv, then install requirements
 ```
 ### Windows
 ```bash
-    python.12 -m venv venv
+    python3.12 -m venv venv
     venv\Scripts\activate
     pip install -U pip wheel
     pip install -r requirements.txt
