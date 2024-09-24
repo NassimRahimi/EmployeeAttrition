@@ -169,10 +169,11 @@ page = st.sidebar.radio(
     "",
     [
         "Exploratory Data Analysis",
-        "Model Pipeline",
+        "Attrition Model Pipeline",
         "Model Evaluation",
-        "Insights",
-        "Attrition Prediction Simulation",
+        "Insights, Strategies & Roadmap",
+        "PoC ML Pipeline",
+        "Attrition Prediction Simulator",
     ],
 )
 
@@ -359,8 +360,8 @@ if page == "Exploratory Data Analysis":
     plot_class_balance(df, target_column="left")
 
 # Pipeline Page
-if page == "Model Pipeline":
-    st.markdown("<h1 class='title'>Model Pipeline</h1>", unsafe_allow_html=True)
+if page == "Attrition Model Pipeline":
+    st.markdown("<h1 class='title'>Attrition Model Pipeline</h1>", unsafe_allow_html=True)
 
     # Load and display the pipeline diagram
     pipeline_image = Image.open("data/pipeline_diagram.png")
@@ -436,7 +437,7 @@ elif page == "Model Evaluation":
 
 
 # Insights Page
-elif page == "Insights":
+elif page == "Insights, Strategies & Roadmap":
     st.markdown(
         "<h1 class='title'>Insights, Retention Strategies and Roadmap for Implementation</h1>", unsafe_allow_html=True
     )
@@ -452,16 +453,28 @@ elif page == "Insights":
     </ul>
     """, unsafe_allow_html=True
     )
-    strategy_img = load_image("data/retention_strategies_graph.png")
+    strategy_img = load_image("data/retention_strategies_updated.png")
     st.image(strategy_img, caption="Retention Strategies")
     roadmap_img = load_image("data/roadmap_graph.png")
-    st.image(roadmap_img, caption="Roadmap for Implementation") 
+    #st.image(roadmap_img, caption="Roadmap for Implementation") 
+    col1, col2, col3 = st.columns([1, 5, 1])
+    col2.image(roadmap_img, caption="Roadmap for Implementation")
+    
+    
+    
+elif page == "PoC ML Pipeline":
+    st.markdown(
+        "<h1 class='title'>PoC ML Pipeline</h1>", unsafe_allow_html=True
+    ) 
+    roadmap_img = load_image("data/ml_pipeline_graph.png")
+    col1, col2, col3 = st.columns([1, 5, 1])
+    col2.image(roadmap_img, caption="ML pipeline")
     
       
     # Simulation Page
-elif page == "Attrition Prediction Simulation":
+elif page == "Attrition Prediction Simulator":
     st.markdown(
-        "<h1 class='title'>Interactive Attrition Prediction Simulation</h1>", unsafe_allow_html=True
+        "<h1 class='title'>Interactive Attrition Prediction Simulator</h1>", unsafe_allow_html=True
     )
 
     # Input sliders for user to set feature values in the sidebar
