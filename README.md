@@ -17,8 +17,11 @@ You can get started with this project using one of two methods:
 Please choose one of the methods below based on your preference.
 ## 🛠️ Method 1: Using a Virtual Environment (venv)
 Prerequisites:
+
 •	Python 3.12 (or higher)
+
 •	Required Python packages listed in the requirements.txt file
+
 Navigate to the project directory on your local machine:
 
 ### 📦 Installation
@@ -355,3 +358,6 @@ Alternatively: Kill the Process
     kill -9 <PID>
 ```
 Then, re-run your container.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details.
